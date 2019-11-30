@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 
 // Load routes into variables
 const index = require('./routes/index');
+const queue = require('./routes/queue');
+const byteCounter = require('./routes/byteCounter');
+const subscription = require('./routes/pubsub');
+const statscounter = require('./routes/hostcounter');
 
 const app = express();
 
@@ -20,7 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure routes in Express webserver
 app.use('/', index);
-
+app.use('/queue', queue);
+app.use('/byteCounter', byteCounter);
+app.use('/pubsub', subscription);
+app.use('/stats', statscounter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
